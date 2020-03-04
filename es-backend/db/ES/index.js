@@ -22,7 +22,20 @@ const search = async (request) => {
   return body;
 };
 
+const searchAll = async () => {
+  const { body } = await client.search({
+    index: 'products',
+    body: {
+      query: {
+        match_all: {}
+      }
+    }
+  });
+  return body;
+};
+
 module.exports = {
   get,
-  search
+  search,
+  searchAll
 };

@@ -1,12 +1,11 @@
 const express = require('express');
 const config = require('./config');
 const app = express();
-const { get, search } = require('./db/ES');
+const { get, search, searchAll } = require('./db/ES');
 
 app.get('/', async (req, res) => {
-  const data = await search(100);
-  console.log(data.hits.hits);
-  res.send('Works 🤗');
+  const data = await searchAll();
+  res.json(data.hits);
 });
 
 app.listen(config.app.port, () => {
